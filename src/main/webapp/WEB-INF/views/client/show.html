@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #div_main {
+        width: 50%;
+        min-height: 250px;
+        margin: 0 auto;
+
+    }
+    h1{
+        margin: 123px 400px 77px;
+        font-family: "komu-a",Verdana,Arial,sans-serif;
+        font-size: 39px;
+        text-transform: uppercase;
+    }
+    #header {
+        width: 100%;
+        height: 4rem;
+        background: #f0eeee;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    #search{
+        margin: 9px 40px;
+        width: auto;
+        height: 40px;
+        float: left;
+    }
+    #img_logo{
+        width: 60px;
+        height: auto;
+        margin: 3px 28rem;
+        float: left;
+    }
+    #logout{
+        float: left;
+        width: 48px;
+        height: auto;
+        margin-left: 377px;
+        margin-top: 14px;
+    }
+</style>
+<title>
+    Blog-show
+</title>
+<body>
+<div id="header">
+    <div id="img_logo">
+        <a th:href="@{/blogs}">
+            <img th:src="@{'/image/'+'Screenshot from 2024-01-23 22-09-40.png'}" src="" width="55px">
+        </a>
+    </div>
+    <div id="search">
+        <form th:action="@{/blogs/search}">
+            <input type="search" name="search" placeholder="Enter Blog" style="width: 300px; height: 45px">
+            <button type="submit"  style="width: 100px; height: 45px">Search</button>
+        </form>
+    </div>
+    <a th:href="@{/users/}">
+        <div id="logout">
+            <i style="font-size: 40px" class="fa-solid fa-right-from-bracket"></i>
+        </div>
+    </a>
+</div>
+<form th:object="${blog}">
+    <h1 th:text="${blog.getTitle()}"></h1>
+    <div id="div_main">
+        <img width="958px" height="550px" th:src="@{'/image/' + ${blog.getPicture()}}" src=""><br/>
+        <div id="content">
+            <h3 th:text="${blog.getDateSubmitted()}" style="font-size: 22px"></h3>
+            <p th:text="${blog.getContent()}" style="font-size: 25px"></p><br>
+            <b><p  th:text="${blog.getAuthor()}" style="font-size: 24px"></p></b>
+        </div>
+    </div>
+</form>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>DetailAccount</title>
+</head>
+<body>
+<h3>View Account</h3>
+<p>
+    <a th:href="@{/admins}">
+        Back to admin list
+    </a>
+</p>
+<div id="detail">
+    <div class="cus-detail">
+        <label>Name:</label>
+        <label th:text="${admin.name}"></label>
+    </div>
+    <div class="cus-detail">
+        <label>Email:</label>
+        <label th:text="${admin.email}"></label>
+    </div>
+    <div class="cus-detail">
+        <label>Password:</label>
+        <label th:text="${admin.password}"></label>
+    </div>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title style="color: black">Admin</title>
+</head>
+<style>
+    .button{
+        width: 80px;
+        height: 40px;
+
+    }
+    #page {
+        height: auto;
+        margin: 40px 98px;
+    }
+</style>
+<body>
+<h3>Admin</h3>
+<p>
+    <form th:action="@{/admins/create}" method="get">
+      <button class="button" type="submit" style="background: #4CAF50">
+          Add
+      </button>
+    </form>
+</p>
+<form th:action="@{/admins/search}" th:method="post" id="form-search">
+    <div id="search">
+        <input type="text" name="search" id="navbar-input">
+        <button class="btn btn-success"  type="submit">Search</button>
+    </div>
+</form>
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStast : ${admins}">
+        <td th:text="${row.getId()}"></td>
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+        <td th:text="${row.getPassword()}"></td>
+        <td><a th:href="@{/admins/{id}/edit(id=${row.getId()})}"><button class="button" style="background: #f1f148">edit</button></a></td>
+        <td><a th:href="@{/admins/{id}/delete(id=${row.getId()})}"><button class="button" style="background: #e76868">delete</button></a></td>
+        <td><a th:href="@{/admins/{id}/view(id=${row.getId()})}"><button class="button" style="background: #87afff">view</button></a></td>
+    </tr>
+    </tbody>
+</table>
+<div id="page">
+    <a  th:if="${admins.hasPrevious()}"
+       th:href="@{/admins(page=${admins.number - 1})}">
+        <button class="button">Previous</button>
+    </a>
+    <span th:text="${admins.number + 1}"></span> | <span th:text="${admins.totalPages}"></span>
+    <a  th:if="${admins.hasNext()}"
+       th:href="@{/admins(page=${admins.number + 1})}">
+        <button class="button">Next</button>
+    </a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

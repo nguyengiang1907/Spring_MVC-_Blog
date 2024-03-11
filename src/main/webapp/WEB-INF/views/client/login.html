@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Login</title>
+</head>
+<body>
+<div id="form">
+    <form th:action="@{/users/login}" th:object="${user}"
+          method="post" enctype="multipart/form-data">
+        <p style="color: red; font-size: 25px; text-align: center" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+        <input type="hidden" th:field="*{id}">
+        <h1 style="text-align: center; color: #6f6f6f">Login</h1>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" th:field="*{password}"/>
+        </div>
+        <input type="submit" value="Login" style="margin: 20px 73px"/>
+    </form>
+    <a th:href="@{/users/signUp}" style="padding-left:199px;">Sign Up</a>
+</div>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
